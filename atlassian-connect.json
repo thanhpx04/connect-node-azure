@@ -1,7 +1,7 @@
 {
     "key": "thanh-app-1330051822",
     "name": "Connect app Nodejs Azure",
-    "description": "My very first app",
+    "description": "Connect framework with Nodejs, deploy on Azure",
     "baseUrl": "https://connect-app-nodejs.azurewebsites.net",
     "authentication": {
         "type": "none"
@@ -15,23 +15,23 @@
     "modules": {
         "generalPages": [
             {
-                "key": "hello-world-page-jira",
+                "key": "main-page-jira",
                 "location": "system.top.navigation.bar",
                 "name": {
-                    "value": "Hello World"
+                    "value": "Connect app with Nodejs"
                 },
-                "url": "/hello-world",
+                "url": "/main",
                 "conditions": [{
                     "condition": "user_is_logged_in"
                 }]
             },
             {
-                "key": "hello-world-page-confluence",
+                "key": "main-page-confluence",
                 "location": "system.header/left",
                 "name": {
-                    "value": "Hello World"
+                    "value": "Connect app with Nodejs"
                 },
-                "url": "/hello-world",
+                "url": "/main",
                 "conditions": [{
                     "condition": "user_is_logged_in"
                 }]

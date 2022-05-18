@@ -1,10 +1,63 @@
 {{!< layout}}
+<script src="https://connect-cdn.atl-paas.net/all.js"></script>
+<script>
+  function getCurrentUser() {
+    AP.request('/rest/api/2/myself', {
+      success: function(res) {
+        let obj = JSON.parse(res);
+        console.log(obj);
+      }
+    });
+  }
+
+  function getIssuesOfCurrentUser() {
+    AP.request('/rest/api/2/search?jql=assignee=currentuser()', {
+      success: function(res) {
+        let obj = JSON.parse(res);
+        let result = obj.issues.map(issue => ({ 
+          id: issue.id, 
+          key: issue.key,
+          summary: issue.fields.summary,
+          project: issue.fields.project.name
+          }));
+        loadTableData(result);
+      }
+    });
+  }
+
+  function loadTableData(items) {
+	AP.request('/rest/api/2/serverInfo', {
+    success: function(res) {
+      let obj = JSON.parse(res);
+		  const jiraSite = obj.baseUrl;
+      const table = document.getElementById("listIssuesOfCurrentUser");
+
+      // clean table data
+      $("#listIssuesOfCurrentUser").empty();
+
+      // populate table data
+      items.forEach( item => {
+        let row = table.insertRow();
+        let id = row.insertCell(0);
+        let key = row.insertCell(1);
+        let summary = row.insertCell(2);
+        let project = row.insertCell(3);
+        id.innerHTML = `<a href="${jiraSite}/browse/${item.key}" target="_blank">${item.id}</a>`; //'<a href="'+whatever+'">'+fname[j]+'</a>'; item.id;
+        key.innerHTML = item.key;
+        summary.innerHTML = item.summary;
+        project.innerHTML = item.project;
+        });
+      }
+    });
+  }
+</script>
+
 <header class="aui-page-header">
   <div class="aui-page-header-inner">
     <div class="aui-page-header-main intro-header">
-      <h1>Hello World!</h1>
+      <h1>The Connect app</h1>
 
-      <p class="subtitle">Welcome to {{title}}</p>
+      <p class="subtitle">Using Nodejs and AUI and deploy on Heroku</p>
     </div>
   </div>
 </header>
@@ -15,16 +68,22 @@
       <div class="aui-group">
         <div class="aui-item">
           <p>
-            Congratulations!
-            You've successfully created an Atlassian Connect app using the
-            <a href="https://bitbucket.org/atlassian/atlassian-connect-express" target="_parent">atlassian-connect-express</a>
-            client library.
+            <button class="aui-button aui-button-primary" type="button" onclick="getIssuesOfCurrentUser()">
+              Get current issues
+            </button>
           </p>
           <p>
-            <a class="aui-button aui-button-primary" href="https://bitbucket.org/atlassian/atlassian-connect-express" target="_parent">
-              Get Started
-              <span class="aui-icon aui-icon-small aui-iconfont-devtools-arrow-right">Arrow right</span>
-            </a>
+            <table class="aui">
+              <thead>
+                  <tr>
+                      <th id="basic-number">ID</th>
+                      <th id="basic-fname">Key</th>
+                      <th id="basic-lname">Summary</th>
+                      <th id="basic-username">Project</th>
+                  </tr>
+              </thead>
+              <tbody id="listIssuesOfCurrentUser"></tbody>
+            </table>
           </p>
         </div>
       </div>
