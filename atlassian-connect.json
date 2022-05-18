@@ -2,7 +2,7 @@
     "key": "thanh-app-1330051822",
     "name": "Connect app Nodejs Azure",
     "description": "My very first app",
-    "baseUrl": "{{localBaseUrl}}",
+    "baseUrl": "https://connect-app-nodejs.azurewebsites.net",
     "authentication": {
         "type": "jwt"
     },
