@@ -18,7 +18,7 @@
                 "key": "main-page-jira",
                 "location": "system.top.navigation.bar",
                 "name": {
-                    "value": "Connect app with Nodejs"
+                    "value": "Connect app Nodejs Azure"
                 },
                 "url": "/main",
                 "conditions": [{
@@ -29,7 +29,7 @@
                 "key": "main-page-confluence",
                 "location": "system.header/left",
                 "name": {
-                    "value": "Connect app with Nodejs"
+                    "value": "Connect app Nodejs Azure"
                 },
                 "url": "/main",
                 "conditions": [{
