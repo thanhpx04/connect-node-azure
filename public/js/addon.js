@@ -18,32 +18,32 @@ function getIssuesOfCurrentUser() {
   }
   
 function loadTableData(items) {
-    AP.request('/rest/api/2/serverInfo', {
-        success: function(res) {
-            let obj;
-            const jiraSite, tableIssues;
+  AP.request('/rest/api/2/serverInfo', {
+    success: function(res) {
+      let obj;
       
-            obj = JSON.parse(res);
-            jiraSite = obj.baseUrl;
-            tableIssues = document.getElementById("listIssuesOfCurrentUser");
-      
-            // clean table data
-            $("#listIssuesOfCurrentUser").empty();
-      
-            // populate table data
-            items.forEach( item => {
-                let row, id, key, summary, project;
-                
-                row = tableIssues.insertRow();
-                id = row.insertCell(0);
-                key = row.insertCell(1);
-                summary = row.insertCell(2);
-                project = row.insertCell(3);
-                id.innerHTML = `<a href="${jiraSite}/browse/${item.key}" target="_blank">${item.id}</a>`;
-                key.innerHTML = item.key;
-                summary.innerHTML = item.summary;
-                project.innerHTML = item.project;
-            });
-        }
-    });
+      obj = JSON.parse(res);
+      const jiraSite = obj.baseUrl;
+      console.log(jiraSite);
+      const table = document.getElementById("listIssuesOfCurrentUser");
+    
+      // clean table data
+      $("#listIssuesOfCurrentUser").empty();
+    
+      // populate table data
+      items.forEach( item => {
+        let row, id, key, summary, project;
+        
+        row = table.insertRow();
+        id = row.insertCell(0);
+        key = row.insertCell(1);
+        summary = row.insertCell(2);
+        project = row.insertCell(3);
+        id.innerHTML = `<a href="${jiraSite}browse/${item.key}" target="_blank">${item.id}</a>`;
+        key.innerHTML = item.key;
+        summary.innerHTML = item.summary;
+        project.innerHTML = item.project;
+      });
+    }
+  });
 }
