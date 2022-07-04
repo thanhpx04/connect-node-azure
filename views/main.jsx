@@ -1,17 +1,11 @@
 // import SectionMessage from '@atlaskit/section-message';
 // import React from 'react';
-import ForgeUI, { useState, Button, Macro, render } from '@forge/ui';
+import ForgeUI, { Text } from '@forge/ui';
 
 export default function HelloWorld() {
-  const [count, setCount] = useState(0);
-  return (
-    <Button
-      text={`Count is ${count}`}
-      onClick={() => {
-        setCount(count + 1);
-      }}
-    />
-  );
+  <Text>
+  Some <Strong>bold text</Strong>
+  </Text>
   // const [excitementLevel, setExcitementLevel] = React.useState(0);
   // return <SectionMessage
   //     title={`Hello, world${excitementLevel ? new Array(excitementLevel).fill('!').join('') : '.'}`}
