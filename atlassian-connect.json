@@ -1,41 +1,25 @@
 {
-    "key": "thanh-app-1330051822",
-    "name": "Connect app Nodejs Azure",
-    "description": "Connect framework with Nodejs, deploy on Azure",
-    "baseUrl": "https://connect-app-nodejs.azurewebsites.net",
-    "authentication": {
-        "type": "none"
-    },
-    "scopes": [
-        "READ"
-    ],
-    "apiMigrations":{
-        "signed-install": true
-    },
-    "modules": {
-        "generalPages": [
-            {
-                "key": "main-page-jira",
-                "location": "system.top.navigation.bar",
-                "name": {
-                    "value": "Connect app Nodejs Azure"
-                },
-                "url": "/main",
-                "conditions": [{
-                    "condition": "user_is_logged_in"
-                }]
-            },
-            {
-                "key": "main-page-confluence",
-                "location": "system.header/left",
-                "name": {
-                    "value": "Connect app Nodejs Azure"
-                },
-                "url": "/main",
-                "conditions": [{
-                    "condition": "user_is_logged_in"
-                }]
-            }
-        ]
-    }
+  "key": "thanh-app-1330051822",
+  "name": "Connect app Nodejs Azure",
+  "description": "Connect framework with Nodejs, deploy on Azure. Explore UI kit + db + host Rest API",
+  "baseUrl": "https://connect-app-nodejs.azurewebsites.net",
+  "authentication": {
+    "type": "none"
+  },
+  "scopes": ["READ"],
+  "apiMigrations": {
+    "signed-install": true
+  },
+  "modules": {
+    "webPanels": [
+      {
+        "key": "example-issue-left-panel",
+        "location": "atl.jira.view.issue.left.context",
+        "name": {
+          "value": "Story point services"
+        },
+        "url": "/main?issueKey={issue.key}"
+      }
+    ]
+  }
 }
