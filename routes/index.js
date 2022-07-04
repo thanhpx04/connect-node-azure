@@ -14,7 +14,7 @@ export default function routes(app, addon) {
     res.render(
       "main.jsx", // change this to 'hello-world.jsx' to use the Atlaskit & React version
       {
-        title: "Thanh title",
+        titleReact: "Thanh title",
         issueKey: issueKey
         //, browserOnly: true // you can set this to disable server-side rendering for react views
       }
