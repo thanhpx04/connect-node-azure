@@ -13,12 +13,12 @@
   "modules": {
     "webPanels": [
       {
-        "key": "example-issue-left-panel",
+        "url": "/main?issueKey={issue.key}",
         "location": "atl.jira.view.issue.left.context",
         "name": {
           "value": "Story point services"
         },
-        "url": "/main?issueKey={issue.key}"
+        "key": "Story-point-services-left-panel"
       }
     ]
   }
