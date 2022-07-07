@@ -4,7 +4,7 @@ export default function routes(app, addon) {
   });
 
   app.get("/main", (req, res) => {
-    // const { issueKey } = req.query;
+    const { issueKey } = req.query;
     // getIssueSummary(addon, req, issueKey).then((data) => {
       res.render("hello-world.hbs", {
         issueKey: issueKey,
