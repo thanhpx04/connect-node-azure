@@ -1,25 +1,51 @@
 export default function routes(app, addon) {
-  // Redirect root path to /atlassian-connect.json,
-  // which will be served by atlassian-connect-express.
   app.get("/", (req, res) => {
     res.redirect("/atlassian-connect.json");
   });
 
-  // This is an example route used by "generalPages" module (see atlassian-connect.json).
-  // Verify that the incoming request is authenticated with Atlassian Connect.
   app.get("/main", (req, res) => {
-    // Rendering a template is easy; the render method takes two params: the name of the component or template file, and its props.
-    // Handlebars and jsx are both supported, but please note that jsx changes require `npm run watch-jsx` in order to be picked up by the server.
     const { issueKey } = req.query;
-    res.render(
-      "main.jsx", // change this to 'hello-world.jsx' to use the Atlaskit & React version
-      {
-        titleReact: "Thanh title",
-        issueKey: issueKey
-        //, browserOnly: true // you can set this to disable server-side rendering for react views
-      }
-    );
+    getIssueSummary(addon, req, issueKey).then((data) => {
+      res.render("main.jsx", {
+        issueKey: issueKey,
+        data: data,
+      });
+    });
   });
+
+  async function getIssueSummary(addon, req, issueKey) {
+    return new Promise((resolve, reject) => {
+      var httpClient = addon.httpClient(req);
+      httpClient.get(
+        `/rest/api/2/issue/${issueKey}/changelog`,
+        function (err, res, body) {
+          var listHistoryStoryPoint = JSON.parse(body).values.filter(
+            (history) =>
+              history.items.some((item) => item.field === "Story Points")
+          );
+          var newestStoryPoint = getNewestHistoryStatus(listHistoryStoryPoint);
+          resolve(newestStoryPoint.toString);
+        }
+      );
+    });
+  }
+
+  const getNewestHistoryStatus = (listHistoryStoryPoint) => {
+    // array length 0 or 1
+    var newestStoryPoint = listHistoryStoryPoint[0];
+    // array length bigger than 1
+    if (listHistoryStoryPoint.length > 1) {
+      // new array avoid Mutation in JavaScript
+      const listStatusOrderedCreatedDates = [...listHistoryStoryPoint].sort(
+        function (current, next) {
+          return Date.parse(next.created) - Date.parse(current.created);
+        }
+      );
+      newestStoryPoint = listStatusOrderedCreatedDates[0];
+    }
+
+    return newestStoryPoint;
+  };
 
   // Add additional route handlers here...
 }
