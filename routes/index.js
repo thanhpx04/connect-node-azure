@@ -18,7 +18,7 @@ export default function routes(app, addon) {
       var httpClient = addon.httpClient(req);
       httpClient.get(`/rest/api/2/issue/${issueKey}/changelog`,
         function (err, res, body) {
-          var listHistoryStoryPoint = body.values.filter(
+          var listHistoryStoryPoint = JSON.parse(body).values.filter(
             (history) =>
               history.items.some((item) => item.field === "Story Points")
           );

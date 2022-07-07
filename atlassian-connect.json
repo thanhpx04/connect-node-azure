@@ -14,11 +14,11 @@
     "webPanels": [
       {
         "url": "/main?issueKey={issue.key}",
-        "location": "atl.jira.view.issue.left.context",
+        "location": "atl.jira.view.issue.right.context",
         "name": {
           "value": "Story point services"
         },
-        "key": "Story-point-services-left-panel"
+        "key": "Story-point-services-right-panel"
       }
     ]
   }
