@@ -1,18 +1,20 @@
 /* App frontend script */
 function getIssuesOfCurrentUser() {
-    AP.request('/rest/api/2/search?jql=assignee=currentuser()', {
+    AP.request(`/rest/api/2/issue/M4P-1/changelog`, {
         success: function(res) {
             let obj, result;
 
+            debugger;
             obj = JSON.parse(res);
-            result = obj.issues.map(issue => ({
-                id: issue.id,
-                key: issue.key,
-                summary: issue.fields.summary,
-                project: issue.fields.project.name
-            }));
+            console.log(obj);
+            // result = obj.issues.map(issue => ({
+            //     id: issue.id,
+            //     key: issue.key,
+            //     summary: issue.fields.summary,
+            //     project: issue.fields.project.name
+            // }));
         
-            loadTableData(result);
+            // loadTableData(result);
       }
     });
   }
