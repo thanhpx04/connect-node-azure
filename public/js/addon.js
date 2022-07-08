@@ -1,31 +1,26 @@
 /* App frontend script */
 export function getIssuesOfCurrentUser() {
-  AP.request(`/rest/api/2/issue/M4P-1/changelog`, {
-    success: function (res) {
-      let obj, result;
-
-      debugger;
-      obj = JSON.parse(res);
-      console.log(obj);
-      // result = obj.issues.map(issue => ({
-      //     id: issue.id,
-      //     key: issue.key,
-      //     summary: issue.fields.summary,
-      //     project: issue.fields.project.name
-      // }));
-
-      // loadTableData(result);
-      // var listHistoryStoryPoint = JSON.parse(body).values.filter(
-      //   (history) =>
-      //     history.items.some((item) => item.field === "Story Points")
-      // );
-      // var newestStoryPoint = getNewestHistoryStatus(listHistoryStoryPoint);
-      // var curentStoryPoint = newestStoryPoint.items.find((item) => {
-      //   return item.field === "Story Points";
-      // });
-      // resolve(curentStoryPoint.toString);
-    },
-  });
+  AP.context.getContext().then(
+      response => {
+        let issueKey;
+debugger;
+        issueKey = response.jira.issue.key;
+        if(issueKey){
+            AP.request(`/rest/api/2/issue/${issueKey}/changelog`)
+            .then(res => {
+              debugger;
+                var listHistoryStatus = JSON.parse(res.body).values.filter(history => history.items.some(item => item.field === 'Story Points'));
+                var newestStatus = getNewestHistoryStatus(listHistoryStatus);
+                var curentStoryPoint = newestStatus.items.find((item) => {
+                  return item.field === "Story Points";
+                });
+                debugger;
+                displayData(curentStoryPoint.toString);
+            })
+            .catch(err => console.log('Request Failed', err));
+        }
+      }
+  );
 }
 
 function displayData(data) {
