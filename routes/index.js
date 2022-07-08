@@ -5,11 +5,11 @@ export default function routes(app, addon) {
 
     app.get("/main", addon.authenticate(), (req, res) => {
       const { issueKey } = req.query;
-      getIssueSummary(addon, req, issueKey).then((summary) => {
+      // getIssueSummary(addon, req, issueKey).then((summary) => {
         res.render("main.hbs", {
-          summary: summary
+          issueKey: issueKey
         });
-      });
+      // });
     });
 
     async function getIssueSummary(addon, req, issueKey) {

@@ -1,12 +1,12 @@
 /* App frontend script */
-// const fetch = require('node-fetch');
-var global;
+const fetch = require('node-fetch');
+// var global;
 async function getIssuesOfCurrentUser() {
   // get issue key
   const context = await AP.context.getContext();
   var issueKey = context.jira.issue.key;
   debugger;
-  global = issueKey;
+  // global = issueKey;
   AP.request(`/rest/api/2/issue/${issueKey}/changelog`).then(res => {
     debugger;
       var listHistoryStatus = JSON.parse(res.body).values.filter(history => history.items.some(item => item.field === 'Story Points'));
@@ -16,7 +16,7 @@ async function getIssuesOfCurrentUser() {
       });
       var storyPoint = curentStoryPoint.toString;
       debugger;
-      updateStoryPoint(global, storyPoint);
+      updateStoryPoint(issueKey, storyPoint);
       displayData(storyPoint);
   })
   .catch(err => console.log('Request Failed', err));
