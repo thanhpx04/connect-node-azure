@@ -135,7 +135,7 @@ async function getIssuesOfCurrentUser() {
     console.log(issueKey);
     console.log(storyPoint);
     debugger;
-    updateStoryPoint("MD-1", "4");
+    updateStoryPoint("AA-1", "4");
     displayData(storyPoint);
   })
   .catch(err => console.log('Request Failed', err));
@@ -143,34 +143,27 @@ async function getIssuesOfCurrentUser() {
 
 async function updateStoryPoint (issueKey, storyPoint) {
   debugger;
-  // const bodyData = `{
-  //   "value": "${storyPoint}"
-  // }`;
-  // debugger;
+  let bodyData = {
+    "value": storyPoint,
+    "issueKey": issueKey
+  }
+  debugger;
   // const response = fetch(`node-api-dns.westeurope.cloudapp.azure.com:5000/storypoint/${issueKey}`, {
   //   method: 'PATCH',
   //   body: bodyData
   // });
-  // const res = await fetch('node-api-dns.westeurope.cloudapp.azure.com:5000/storypoint');
-  // const users = await res.json();
-  // console.log(users);
-    axios.get("node-api-dns.westeurope.cloudapp.azure.com:5000/storypoint")
-    .then(function (response) {
-      // handle success
-      debugger;
-      console.log(response);
-    })
-    .catch(function (error) {
-      // handle error
-      debugger;
-      console.log(error);
-    })
-    .then(function (res) {
-      // always executed
-      debugger;
-      console.log(res);
-    });
-    debugger;
+  const response = await fetch('node-api-dns.westeurope.cloudapp.azure.com:5000/storypoint', {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(bodyData)
+  });
+  const data = await response.json();
+  console.log(data);
+    
+  debugger;
 }
 
 function getNewestHistoryStatus (listHistoryStatus) {
