@@ -4,9 +4,15 @@
   "description": "Connect framework with Nodejs, deploy on Azure. Explore UI kit + db + host Rest API",
   "baseUrl": "https://connect-app-nodejs.azurewebsites.net",
   "authentication": {
-    "type": "none"
+    "type": "jwt"
   },
-  "scopes": ["READ"],
+  "lifecycle": {
+      "installed": "/installed",
+      "uninstalled": "/uninstalled"
+  },
+  "scopes": [
+      "READ"
+  ],
   "apiMigrations": {
     "signed-install": true
   },
@@ -18,7 +24,7 @@
         "name": {
           "value": "Story point services"
         },
-        "key": "Story-point-services-right-panel"
+        "key": "story-point-services-right-panel"
       }
     ]
   }
