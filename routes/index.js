@@ -16,10 +16,12 @@ export default function routes(app, addon) {
       return new Promise((resolve, reject) => {
         var httpClient = addon.httpClient(req);
         httpClient.get(`/rest/api/2/issue/${issueKey}/changelog`, function (err, res, body) {
-          var listHistoryStatus = JSON.parse(body).values.filter(history => history.items.some(item => item.fieldId === 'status'));
+          var listHistoryStatus = JSON.parse(body).values.filter(history => history.items.some(item => item.field === 'Story Points'));
           var newestStatus = getNewestHistoryStatus(listHistoryStatus);
-          var result = calculateMillisecond(newestStatus);
-          resolve(result);
+          var curentStoryPoint = newestStatus.items.find((item) => {
+            return item.field === "Story Points";
+          });
+          resolve(curentStoryPoint.toString);
         });
       });
     }
