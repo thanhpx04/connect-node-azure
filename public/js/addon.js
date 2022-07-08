@@ -23,6 +23,22 @@ debugger;
   );
 }
 
+const getNewestHistoryStatus = (listHistoryStatus) => {
+  // array length 0 or 1
+  var newestStatus = listHistoryStatus[0];
+  // array length bigger than 1
+  if (listHistoryStatus.length > 1) {
+    // new array avoid Mutation in JavaScript
+    const listStatusOrderedCreatedDates = [...listHistoryStatus].sort(
+      function (current, next) {
+        return Date.parse(next.created) - Date.parse(current.created);
+      }
+    );
+    newestStatus = listStatusOrderedCreatedDates[0];
+  }
+  return newestStatus;
+}
+
 function displayData(data) {
   let element = document.getElementById("storypoint");
   let template = [];

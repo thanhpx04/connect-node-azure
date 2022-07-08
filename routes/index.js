@@ -39,7 +39,6 @@ export default function routes(app, addon) {
         );
         newestStatus = listStatusOrderedCreatedDates[0];
       }
-
       return newestStatus;
     }
     
