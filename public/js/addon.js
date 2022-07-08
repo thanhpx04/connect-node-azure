@@ -1,5 +1,5 @@
 /* App frontend script */
-export function getIssuesOfCurrentUser() {
+function getIssuesOfCurrentUser() {
   AP.context.getContext().then(
       response => {
         let issueKey;
