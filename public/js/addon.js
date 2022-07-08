@@ -1,7 +1,7 @@
 /* App frontend script */
 function getIssuesOfCurrentUser() {
   AP.request(`/rest/api/2/issue/M4P-1/changelog`, {
-    success: function (res) {
+    success: function (err, res, body) {
       let obj, result;
 
       debugger;
