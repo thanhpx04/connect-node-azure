@@ -3,16 +3,12 @@ export default function routes(app, addon) {
     res.redirect("/atlassian-connect.json");
   });
 
-    app.get("/main", addon.authenticate(), (req, res) => {
+    app.get("/main", (req, res) => {
       const { issueKey } = req.query;
       getIssueSummary(addon, req, issueKey).then((summary) => {
-        if (summary) {
-          res.render("main.hbs", {
-            summary: summary
-          });
-        } else {
-          res.render("nodata.hbs");
-        }
+        res.render("main.hbs", {
+          summary: summary
+        });
       });
     });
 
