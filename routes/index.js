@@ -5,12 +5,12 @@ export default function routes(app, addon) {
 
   app.get("/main", (req, res) => {
     const { issueKey } = req.query;
-    // getIssueSummary(addon, req, issueKey).then((data) => {
+    getIssueSummary(addon, req, issueKey).then((data) => {
       res.render("hello-world.hbs", {
         issueKey: issueKey,
-        // data: data
+        data: data
       });
-    // });
+    });
   });
 
   async function getIssueSummary(addon, req, issueKey) {
@@ -18,7 +18,7 @@ export default function routes(app, addon) {
       var httpClient = addon.httpClient(req);
       httpClient.get(`/rest/api/2/issue/${issueKey}/changelog`,
         function (err, res, body) {
-          var listHistoryStoryPoint = JSON.parse(body).values.filter(
+          var listHistoryStoryPoint = JSON.parse(res).values.filter(
             (history) =>
               history.items.some((item) => item.field === "Story Points")
           );
