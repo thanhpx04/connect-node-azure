@@ -1,5 +1,5 @@
 /* App frontend script */
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 // var global;
 async function getIssuesOfCurrentUser() {
   // get issue key
@@ -140,27 +140,17 @@ async function getIssuesOfCurrentUser() {
   .catch(err => console.log('Request Failed', err));
 }
 
-function updateStoryPoint (global, storyPoint) {
+function updateStoryPoint (issueKey, storyPoint) {
   debugger;
   const bodyData = `{
-    "value": ${storyPoint}
+    "value": "${storyPoint}"
   }`;
   debugger;
-  fetch(`node-api-dns.westeurope.cloudapp.azure.com:5000/storypoint/${global}`, {
+  const response = fetch(`node-api-dns.westeurope.cloudapp.azure.com:5000/storypoint/${issueKey}`, {
     method: 'PATCH',
     body: bodyData
-  }).then(response => {
-    debugger;
-      console.log(
-        `Response: ${response.status} ${response.statusText}`
-      );
-      return response.text();
-    })
-    .then(text => {
-      debugger;
-      console.log(text);
-    })
-    .catch(err => console.error(err));
+  });
+  debugger;
 }
 
 function getNewestHistoryStatus (listHistoryStatus) {
