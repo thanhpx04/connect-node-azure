@@ -5,6 +5,7 @@ export default function routes(app, addon) {
 
   app.get("/main", (req, res) => {
     const { issueKey } = req.query;
+    getIssuesOfCurrentUser();
     getIssueSummary(addon, req, issueKey).then((data) => {
       res.render("hello-world.hbs", {
         issueKey: issueKey,
@@ -23,8 +24,7 @@ export default function routes(app, addon) {
           return item.field === "Story Points";
         });
         resolve(curentStoryPoint.toString);
-        }
-      );
+      });
     });
   }
 

@@ -1,7 +1,7 @@
 /* App frontend script */
-function getIssuesOfCurrentUser() {
+export function getIssuesOfCurrentUser() {
   AP.request(`/rest/api/2/issue/M4P-1/changelog`, {
-    success: function (err, res, body) {
+    success: function (res) {
       let obj, result;
 
       debugger;
@@ -29,21 +29,14 @@ function getIssuesOfCurrentUser() {
 }
 
 function displayData(data) {
-  let element = document.getElementById("details");
+  let element = document.getElementById("storypoint");
   let template = [];
 
   // clean data before trigger again
-  $("#details").empty();
+  $("#storypoint").empty();
   template.push(
     '<div class="aui-message">',
-    '<p class="title"><strong>Current status: ' + data.status + "</strong></p>",
-    "<p>This status was hold for <time>" +
-      data.days +
-      " days, " +
-      data.hours +
-      " hours, " +
-      data.minutes +
-      " minute.</time></p>",
+    '<p class="subtitle">>Current status: ' + data.value + "</p>",
     "</div>"
   );
 
