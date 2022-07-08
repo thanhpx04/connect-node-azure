@@ -4,7 +4,7 @@ var global;
 async function getIssuesOfCurrentUser() {
   // get issue key
   const context = await AP.context.getContext();
-  issueKey = context.jira.issue.key;
+  var issueKey = context.jira.issue.key;
   debugger;
   global = issueKey;
   AP.request(`/rest/api/2/issue/${issueKey}/changelog`).then(res => {
@@ -16,14 +16,33 @@ async function getIssuesOfCurrentUser() {
       });
       var storyPoint = curentStoryPoint.toString;
       debugger;
-      updateStoryPoint(storyPoint);
+      updateStoryPoint(global, storyPoint);
       displayData(storyPoint);
   })
   .catch(err => console.log('Request Failed', err));
 }
 
-const updateStoryPoint = (storyPoint) => {
-  console.log();
+const updateStoryPoint = (global, storyPoint) => {
+  debugger;
+  const bodyData = `{
+    "value": ${storyPoint}
+  }`;
+  debugger;
+  fetch(`node-api-dns.westeurope.cloudapp.azure.com:5000/storypoint/${global}`, {
+    method: 'PATCH',
+    body: bodyData
+  }).then(response => {
+    debugger;
+      console.log(
+        `Response: ${response.status} ${response.statusText}`
+      );
+      return response.text();
+    })
+    .then(text => {
+      debugger;
+      console.log(text);
+    })
+    .catch(err => console.error(err));
 }
 
 const getNewestHistoryStatus = (listHistoryStatus) => {
