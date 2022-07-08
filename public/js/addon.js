@@ -1,9 +1,13 @@
 /* App frontend script */
-function getIssuesOfCurrentUser() {
+async function getIssuesOfCurrentUser() {
+  // get issue key
+  debugger;
+  const context = await AP.context.getContext();
+  debugger;
+
   AP.context.getContext().then(
       response => {
         let issueKey;
-debugger;
         issueKey = response.jira.issue.key;
         if(issueKey){
             AP.request(`/rest/api/2/issue/${issueKey}/changelog`)
@@ -15,6 +19,7 @@ debugger;
                   return item.field === "Story Points";
                 });
                 debugger;
+                updateStoryPoint()
                 displayData(curentStoryPoint.toString);
             })
             .catch(err => console.log('Request Failed', err));
@@ -47,7 +52,7 @@ function displayData(data) {
   $("#storypoint").empty();
   template.push(
     '<div class="aui-message">',
-    '<p class="subtitle">>Current status: ' + data.value + "</p>",
+    '<p class="subtitle">Story point: ' + data + "</p>",
     "</div>"
   );
 
