@@ -1,5 +1,5 @@
-// import React from "react";
-import ForgeUI, { Button, Fragment, Text, Badge } from "@forge/ui";
+import React from "react";
+// import ForgeUI, { Button, Fragment, Text, Badge } from "@forge/ui";
 
 export default function HelloWorld() {
   return (
