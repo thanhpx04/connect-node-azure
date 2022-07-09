@@ -152,7 +152,7 @@ async function updateStoryPoint (issueKey, storyPoint) {
   //   method: 'PATCH',
   //   body: bodyData
   // });
-  const response = await fetch('https://node-api-mongodb.azurewebsites.net/storypoint', {
+  const response = await fetch('https://crmprm-reminder.azurewebsites.net/storypoint', {
       method: 'POST',
       headers: {
           'Accept': 'application/json',
