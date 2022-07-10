@@ -1,15 +1,11 @@
-{{!< layout}}
-
-
-        <div class="aui-item">
-          <p class="subtitle">Issue key: {{issueKey}}</p>
-          <p>
-            <button class="aui-button aui-button-primary" type="button" onclick="getIssuesOfCurrentUser()">
-              Get story point
-            </button>
-          </p>
-          <hr>
-        </div>
-        <div id="storypoint">
-        </div>
-
+{{!< layout}} 
+<p>
+  <button class="aui-button aui-button-primary" type="button" onclick="getIssuesOfCurrentUser()">
+    Get story point
+  </button>
+</p>
+<div class="aui-message">
+  <p class="subtitle">Issue key: {{issueKey}}</p>
+</div>
+<div id="storypoint">
+</div>

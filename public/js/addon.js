@@ -15,7 +15,6 @@ async function getIssuesOfCurrentUser() {
     console.log(issueKey);
     console.log(storyPoint);
     updateStoryPoint(issueKey, storyPoint);
-    displayData(storyPoint);
   })
   .catch(err => console.log('Request Failed', err));
 }
@@ -39,6 +38,7 @@ async function updateStoryPoint(issueKey, storyPoint) {
       }
     );
     const dataPatch = await responseUpdate.json();
+    if (dataPatch) displayData(storyPoint);
     console.log(dataPatch);
   } else {
     let bodyInsert = {
@@ -56,6 +56,7 @@ async function updateStoryPoint(issueKey, storyPoint) {
       }
     );
     const dataPost = await responsePost.json();
+    if (dataPost) displayData(storyPoint);
     console.log(dataPost);
   }
 }
