@@ -4,129 +4,9 @@ async function getIssuesOfCurrentUser() {
   // get issue key
   const context = await AP.context.getContext();
   var issueKey = context.jira.issue.key;
-  debugger;
   // global = issueKey;
   AP.request(`/rest/api/2/issue/${issueKey}/changelog`).then(res => {
-    debugger;
     var listHistoryStatus = JSON.parse(res.body).values.filter(history => history.items.some(item => item.field === 'Story Points'));
-  //   var listHistoryStatus = [
-  //     {
-  //         "id": "10184",
-  //         "author": {
-  //             "self": "https://thanhpx04.atlassian.net/rest/api/2/user?accountId=557058%3Aae1e597e-ef2a-43c9-988f-336d01f5a75a",
-  //             "accountId": "557058:ae1e597e-ef2a-43c9-988f-336d01f5a75a",
-  //             "avatarUrls": {
-  //                 "48x48": "https://secure.gravatar.com/avatar/5a949854bac40da2262aae3c5eb128d5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTP-4.png",
-  //                 "24x24": "https://secure.gravatar.com/avatar/5a949854bac40da2262aae3c5eb128d5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTP-4.png",
-  //                 "16x16": "https://secure.gravatar.com/avatar/5a949854bac40da2262aae3c5eb128d5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTP-4.png",
-  //                 "32x32": "https://secure.gravatar.com/avatar/5a949854bac40da2262aae3c5eb128d5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTP-4.png"
-  //             },
-  //             "displayName": "Thanh Pham",
-  //             "active": true,
-  //             "timeZone": "Asia/Bangkok",
-  //             "accountType": "atlassian"
-  //         },
-  //         "created": "2022-07-07T16:54:34.393+0700",
-  //         "items": [
-  //             {
-  //                 "field": "Story Points",
-  //                 "fieldtype": "custom",
-  //                 "fieldId": "customfield_10028",
-  //                 "from": null,
-  //                 "fromString": null,
-  //                 "to": null,
-  //                 "toString": "2"
-  //             }
-  //         ]
-  //     },
-  //     {
-  //         "id": "10185",
-  //         "author": {
-  //             "self": "https://thanhpx04.atlassian.net/rest/api/2/user?accountId=557058%3Aae1e597e-ef2a-43c9-988f-336d01f5a75a",
-  //             "accountId": "557058:ae1e597e-ef2a-43c9-988f-336d01f5a75a",
-  //             "avatarUrls": {
-  //                 "48x48": "https://secure.gravatar.com/avatar/5a949854bac40da2262aae3c5eb128d5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTP-4.png",
-  //                 "24x24": "https://secure.gravatar.com/avatar/5a949854bac40da2262aae3c5eb128d5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTP-4.png",
-  //                 "16x16": "https://secure.gravatar.com/avatar/5a949854bac40da2262aae3c5eb128d5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTP-4.png",
-  //                 "32x32": "https://secure.gravatar.com/avatar/5a949854bac40da2262aae3c5eb128d5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTP-4.png"
-  //             },
-  //             "displayName": "Thanh Pham",
-  //             "active": true,
-  //             "timeZone": "Asia/Bangkok",
-  //             "accountType": "atlassian"
-  //         },
-  //         "created": "2022-07-07T16:59:16.808+0700",
-  //         "items": [
-  //             {
-  //                 "field": "Story Points",
-  //                 "fieldtype": "custom",
-  //                 "fieldId": "customfield_10028",
-  //                 "from": null,
-  //                 "fromString": "2",
-  //                 "to": null,
-  //                 "toString": "6"
-  //             }
-  //         ]
-  //     },
-  //     {
-  //         "id": "10186",
-  //         "author": {
-  //             "self": "https://thanhpx04.atlassian.net/rest/api/2/user?accountId=557058%3Aae1e597e-ef2a-43c9-988f-336d01f5a75a",
-  //             "accountId": "557058:ae1e597e-ef2a-43c9-988f-336d01f5a75a",
-  //             "avatarUrls": {
-  //                 "48x48": "https://secure.gravatar.com/avatar/5a949854bac40da2262aae3c5eb128d5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTP-4.png",
-  //                 "24x24": "https://secure.gravatar.com/avatar/5a949854bac40da2262aae3c5eb128d5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTP-4.png",
-  //                 "16x16": "https://secure.gravatar.com/avatar/5a949854bac40da2262aae3c5eb128d5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTP-4.png",
-  //                 "32x32": "https://secure.gravatar.com/avatar/5a949854bac40da2262aae3c5eb128d5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTP-4.png"
-  //             },
-  //             "displayName": "Thanh Pham",
-  //             "active": true,
-  //             "timeZone": "Asia/Bangkok",
-  //             "accountType": "atlassian"
-  //         },
-  //         "created": "2022-07-08T12:26:00.348+0700",
-  //         "items": [
-  //             {
-  //                 "field": "Story Points",
-  //                 "fieldtype": "custom",
-  //                 "fieldId": "customfield_10028",
-  //                 "from": null,
-  //                 "fromString": "6",
-  //                 "to": null,
-  //                 "toString": "8"
-  //             }
-  //         ]
-  //     },
-  //     {
-  //         "id": "10187",
-  //         "author": {
-  //             "self": "https://thanhpx04.atlassian.net/rest/api/2/user?accountId=557058%3Aae1e597e-ef2a-43c9-988f-336d01f5a75a",
-  //             "accountId": "557058:ae1e597e-ef2a-43c9-988f-336d01f5a75a",
-  //             "avatarUrls": {
-  //                 "48x48": "https://secure.gravatar.com/avatar/5a949854bac40da2262aae3c5eb128d5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTP-4.png",
-  //                 "24x24": "https://secure.gravatar.com/avatar/5a949854bac40da2262aae3c5eb128d5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTP-4.png",
-  //                 "16x16": "https://secure.gravatar.com/avatar/5a949854bac40da2262aae3c5eb128d5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTP-4.png",
-  //                 "32x32": "https://secure.gravatar.com/avatar/5a949854bac40da2262aae3c5eb128d5?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FTP-4.png"
-  //             },
-  //             "displayName": "Thanh Pham",
-  //             "active": true,
-  //             "timeZone": "Asia/Bangkok",
-  //             "accountType": "atlassian"
-  //         },
-  //         "created": "2022-07-08T13:13:24.254+0700",
-  //         "items": [
-  //             {
-  //                 "field": "Story Points",
-  //                 "fieldtype": "custom",
-  //                 "fieldId": "customfield_10028",
-  //                 "from": null,
-  //                 "fromString": "8",
-  //                 "to": null,
-  //                 "toString": "7"
-  //             }
-  //         ]
-  //     }
-  // ];
     var newestStatus = getNewestHistoryStatus(listHistoryStatus);
     var curentStoryPoint = newestStatus.items.find((item) => {
       return item.field === "Story Points";
@@ -134,36 +14,50 @@ async function getIssuesOfCurrentUser() {
     var storyPoint = curentStoryPoint.toString;
     console.log(issueKey);
     console.log(storyPoint);
-    debugger;
-    updateStoryPoint("AA-1", "4");
+    updateStoryPoint(issueKey, storyPoint);
     displayData(storyPoint);
   })
   .catch(err => console.log('Request Failed', err));
 }
 
-async function updateStoryPoint (issueKey, storyPoint) {
-  debugger;
-  let bodyData = {
-    "value": storyPoint,
-    "issueKey": issueKey
+async function updateStoryPoint(issueKey, storyPoint) {
+  const responseGet = await fetch(`https://crmprm-reminder.azurewebsites.net/storypoint/${issueKey}`);
+  const dataGet = await responseGet.json();
+  // check existing data then update otherwise insert
+  if (dataGet) {
+    let bodyUpdate = {
+      value: storyPoint
+    };
+    const responseUpdate = await fetch(`https://crmprm-reminder.azurewebsites.net/storypoint/${issueKey}`,
+      {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bodyUpdate),
+      }
+    );
+    const dataPatch = await responseUpdate.json();
+    console.log(dataPatch);
+  } else {
+    let bodyInsert = {
+      value: storyPoint,
+      issueKey: issueKey,
+    };
+    const responsePost = await fetch(`https://crmprm-reminder.azurewebsites.net/storypoint`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bodyInsert),
+      }
+    );
+    const dataPost = await responsePost.json();
+    console.log(dataPost);
   }
-  debugger;
-  // const response = fetch(`node-api-dns.westeurope.cloudapp.azure.com:5000/storypoint/${issueKey}`, {
-  //   method: 'PATCH',
-  //   body: bodyData
-  // });
-  const response = await fetch('https://crmprm-reminder.azurewebsites.net/storypoint', {
-      method: 'POST',
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(bodyData)
-  });
-  const data = await response.json();
-  console.log(data);
-    
-  debugger;
 }
 
 function getNewestHistoryStatus (listHistoryStatus) {
