@@ -17,6 +17,19 @@
     "signed-install": true
   },
   "modules": {
+    "generalPages": [
+        {
+            "key": "story-point-page-jira",
+            "location": "system.top.navigation.bar",
+            "name": {
+                "value": "Get all data"
+            },
+            "url": "/master",
+            "conditions": [{
+                "condition": "user_is_logged_in"
+            }]
+        }
+    ],
     "webPanels": [
       {
         "url": "/main?issueKey={issue.key}",

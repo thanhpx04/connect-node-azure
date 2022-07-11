@@ -92,3 +92,32 @@ function displayData(data) {
   let htmlString = template.join("");
   element.innerHTML = htmlString;
 }
+
+async function getAllStoryPoint(){
+  const responseGet = await fetch(`https://crmprm-reminder.azurewebsites.net/storypoint`);
+  const dataGet = await responseGet.json();
+  debugger;
+  if (dataGet) {
+    loadTableData(dataGet);
+  }
+}
+
+function loadTableData(items) {
+          const tableIssues = document.getElementById("listAllStoryPoint");
+    
+          // clean table data
+          $("#listAllStoryPoint").empty();
+    
+          // populate table data
+          items.forEach( item => {
+              let row, issueKey, story, date;
+              
+              row = tableIssues.insertRow();
+              issueKey = row.insertCell(0);
+              story = row.insertCell(1);
+              date = row.insertCell(2);
+              issueKey.innerHTML = item.issueKey;
+              story.innerHTML = item.value;
+              date.innerHTML = item.date;
+          });
+}
